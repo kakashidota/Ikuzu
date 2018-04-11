@@ -12,115 +12,110 @@ import SceneKit
 
 class GameViewController: UIViewController {
 
+    var sceneView: SCNView!
+    var lightNode = SCNNode()
+    var playerNode = SCNNode()
+    
+    var scene: SCNScene!
+    var cameraNode = SCNNode()
+    var mapNode = SCNNode()
+    var lanes = [LaneNode]()
+    var laneCount = 0
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupScene()
+        setupPlayer()
+        setupFloor()
+        setupCamera()
+        setupLight()
+    }
+    
+ 
+    func setupScene(){
+        sceneView = view as! SCNView
+        scene = SCNScene()
         
-        // create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        sceneView.scene = scene
+        scene.rootNode.addChildNode(mapNode)
         
-        // create and add a camera to the scene
-        let cameraNode = SCNNode()
+        for _ in 0..<20 {
+            let type  = randomBool(odds: 3) ? LaneType.grass : LaneType.road
+            let lane = LaneNode.init(type: type, width: 21)
+            lane.position = SCNVector3(x: 0, y: 0, z: 5 - Float(laneCount))
+            laneCount += 1
+            lanes.append(lane)
+            mapNode.addChildNode(lane)
+            
+        }
+    }
+    
+    func setupPlayer(){
+        guard let playerScene = SCNScene(named: "art.scnassets/Kurd.scn") else { return }
+        if let player = playerScene.rootNode.childNode(withName: "player", recursively: true){
+            playerNode = player
+            playerNode.position = SCNVector3(x: 0, y: 0.3, z: 0)
+            scene.rootNode.addChildNode(playerNode)
+        }
+        
+        
+        
+    }
+    
+    func setupFloor(){
+        let floor = SCNFloor()
+        floor.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/darkgrass.png")
+        floor.firstMaterial?.diffuse.wrapS = .repeat
+        floor.firstMaterial?.diffuse.wrapT = .repeat
+        floor.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(12.5, 12.5, 12.5)
+        floor.reflectivity = 0.0
+        
+        let floorNode = SCNNode(geometry: floor)
+        scene.rootNode.addChildNode(floorNode)
+        
+    }
+    
+    func setupCamera(){
         cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3(x: 0, y: 10, z: 0)
+        cameraNode.eulerAngles = SCNVector3(x: -toRadians(angle: 72), y: toRadians(angle: 9), z: 0)
         scene.rootNode.addChildNode(cameraNode)
         
-        // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
         
-        // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
+        
+    }
+    
+    func setupLight(){
+        let ambientNode = SCNNode()
+        ambientNode.light = SCNLight()
+        ambientNode.light?.type = .ambient
+        
+        let directialNode = SCNNode()
+        directialNode.light = SCNLight()
+        directialNode.light?.type = .directional
+        directialNode.light?.castsShadow = true
+        directialNode.light?.shadowColor = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
+        directialNode.position = SCNVector3(x: -5, y: 5, z: 0)
+        directialNode.eulerAngles = SCNVector3(x: 0, y: -toRadians(angle: 90), z: -toRadians(angle: 45))
+        
+        lightNode.addChildNode(ambientNode)
+        lightNode.addChildNode(directialNode)
+        lightNode.position = cameraNode.position
         scene.rootNode.addChildNode(lightNode)
-        
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor.darkGray
-        scene.rootNode.addChildNode(ambientLightNode)
-        
-        // retrieve the ship node
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-        
-        // animate the 3d object
-        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
-        
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
-        // set the scene to the view
-        scnView.scene = scene
-        
-        // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
-        
-        // show statistics such as fps and timing information
-        scnView.showsStatistics = true
-        
-        // configure the view
-        scnView.backgroundColor = UIColor.black
-        
-        // add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        scnView.addGestureRecognizer(tapGesture)
     }
     
-    @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer) {
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
-        // check what nodes are tapped
-        let p = gestureRecognize.location(in: scnView)
-        let hitResults = scnView.hitTest(p, options: [:])
-        // check that we clicked on at least one object
-        if hitResults.count > 0 {
-            // retrieved the first clicked object
-            let result = hitResults[0]
-            
-            // get its material
-            let material = result.node.geometry!.firstMaterial!
-            
-            // highlight it
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
-            
-            // on completion - unhighlight
-            SCNTransaction.completionBlock = {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
-                
-                material.emission.contents = UIColor.black
-                
-                SCNTransaction.commit()
-            }
-            
-            material.emission.contents = UIColor.red
-            
-            SCNTransaction.commit()
-        }
-    }
     
-    override var shouldAutorotate: Bool {
-        return true
-    }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
-    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
+    
+    
+    
+    
+    
+    
+    
+    
 
 }

@@ -13,6 +13,8 @@
 		0FF4F0DB207D52BF00C4EFCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FF4F0D9207D52BF00C4EFCF /* Main.storyboard */; };
 		0FF4F0DD207D52C100C4EFCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FF4F0DC207D52C100C4EFCF /* Assets.xcassets */; };
 		0FF4F0E0207D52C100C4EFCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FF4F0DE207D52C100C4EFCF /* LaunchScreen.storyboard */; };
+		0FF4F0E8207D613400C4EFCF /* LaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF4F0E7207D613400C4EFCF /* LaneNode.swift */; };
+		0FF4F0EA207D651200C4EFCF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF4F0E9207D651200C4EFCF /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0FF4F0DC207D52C100C4EFCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FF4F0DF207D52C100C4EFCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FF4F0E1207D52C100C4EFCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FF4F0E7207D613400C4EFCF /* LaneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaneNode.swift; sourceTree = "<group>"; };
+		0FF4F0E9207D651200C4EFCF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				0FF4F0DC207D52C100C4EFCF /* Assets.xcassets */,
 				0FF4F0DE207D52C100C4EFCF /* LaunchScreen.storyboard */,
 				0FF4F0E1207D52C100C4EFCF /* Info.plist */,
+				0FF4F0E7207D613400C4EFCF /* LaneNode.swift */,
+				0FF4F0E9207D651200C4EFCF /* Utils.swift */,
 			);
 			path = Ikizu;
 			sourceTree = "<group>";
@@ -139,8 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FF4F0E8207D613400C4EFCF /* LaneNode.swift in Sources */,
 				0FF4F0D8207D52BF00C4EFCF /* GameViewController.swift in Sources */,
 				0FF4F0D4207D52BF00C4EFCF /* AppDelegate.swift in Sources */,
+				0FF4F0EA207D651200C4EFCF /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
