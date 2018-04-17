@@ -8,9 +8,12 @@
 
 import UIKit
 import QuartzCore
+import SpriteKit
 import SceneKit
 
 class GameViewController: UIViewController {
+    
+    
 
     var sceneView: SCNView!
     var lightNode = SCNNode()
@@ -21,17 +24,22 @@ class GameViewController: UIViewController {
     var mapNode = SCNNode()
     var lanes = [LaneNode]()
     var laneCount = 0
+    
+    var moveAnalogStick = AnalogJoystick(diameter: 50)
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScene()
         setupPlayer()
+        setupControllers()
         setupFloor()
         setupCamera()
         setupLight()
     }
     
+ 
  
     func setupScene(){
         sceneView = view as! SCNView
@@ -59,9 +67,13 @@ class GameViewController: UIViewController {
             scene.rootNode.addChildNode(playerNode)
         }
         
-        
+    }
+    
+    func setupControllers(){
         
     }
+
+    
     
     func setupFloor(){
         let floor = SCNFloor()
@@ -74,6 +86,10 @@ class GameViewController: UIViewController {
         let floorNode = SCNNode(geometry: floor)
         scene.rootNode.addChildNode(floorNode)
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        playerNode.position = SCNVector3(x: playerNode.position.x + 1, y: playerNode.position.y + 1, z: playerNode.position.z + 1)
     }
     
     func setupCamera(){

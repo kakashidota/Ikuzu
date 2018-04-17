@@ -15,6 +15,8 @@
 		0FF4F0E0207D52C100C4EFCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FF4F0DE207D52C100C4EFCF /* LaunchScreen.storyboard */; };
 		0FF4F0E8207D613400C4EFCF /* LaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF4F0E7207D613400C4EFCF /* LaneNode.swift */; };
 		0FF4F0EA207D651200C4EFCF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF4F0E9207D651200C4EFCF /* Utils.swift */; };
+		0FF4F0EE207E9E1E00C4EFCF /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF4F0ED207E9E1E00C4EFCF /* AnalogJoystick.swift */; };
+		0FF4F0F0207EAAFF00C4EFCF /* mySCn.scn in Resources */ = {isa = PBXBuildFile; fileRef = 0FF4F0EF207EAAFF00C4EFCF /* mySCn.scn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		0FF4F0E1207D52C100C4EFCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FF4F0E7207D613400C4EFCF /* LaneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaneNode.swift; sourceTree = "<group>"; };
 		0FF4F0E9207D651200C4EFCF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0FF4F0ED207E9E1E00C4EFCF /* AnalogJoystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
+		0FF4F0EF207EAAFF00C4EFCF /* mySCn.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = mySCn.scn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +67,14 @@
 				0FF4F0D3207D52BF00C4EFCF /* AppDelegate.swift */,
 				0FF4F0D5207D52BF00C4EFCF /* art.scnassets */,
 				0FF4F0D7207D52BF00C4EFCF /* GameViewController.swift */,
+				0FF4F0ED207E9E1E00C4EFCF /* AnalogJoystick.swift */,
 				0FF4F0D9207D52BF00C4EFCF /* Main.storyboard */,
 				0FF4F0DC207D52C100C4EFCF /* Assets.xcassets */,
 				0FF4F0DE207D52C100C4EFCF /* LaunchScreen.storyboard */,
 				0FF4F0E1207D52C100C4EFCF /* Info.plist */,
 				0FF4F0E7207D613400C4EFCF /* LaneNode.swift */,
 				0FF4F0E9207D651200C4EFCF /* Utils.swift */,
+				0FF4F0EF207EAAFF00C4EFCF /* mySCn.scn */,
 			);
 			path = Ikizu;
 			sourceTree = "<group>";
@@ -135,6 +141,7 @@
 				0FF4F0E0207D52C100C4EFCF /* LaunchScreen.storyboard in Resources */,
 				0FF4F0DD207D52C100C4EFCF /* Assets.xcassets in Resources */,
 				0FF4F0DB207D52BF00C4EFCF /* Main.storyboard in Resources */,
+				0FF4F0F0207EAAFF00C4EFCF /* mySCn.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FF4F0E8207D613400C4EFCF /* LaneNode.swift in Sources */,
+				0FF4F0EE207E9E1E00C4EFCF /* AnalogJoystick.swift in Sources */,
 				0FF4F0D8207D52BF00C4EFCF /* GameViewController.swift in Sources */,
 				0FF4F0D4207D52BF00C4EFCF /* AppDelegate.swift in Sources */,
 				0FF4F0EA207D651200C4EFCF /* Utils.swift in Sources */,
